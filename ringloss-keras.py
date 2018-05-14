@@ -8,9 +8,7 @@ class Ring_Loss(Layer):
         super(Ring_Loss, self).__init__(**kwargs)
 
     def build(self, input_shape):
-        
         self.var_shape = (1,)
-        
         #init radius weight value
         self.ring_norm = self.add_weight(name='ring_norm',
                                      shape=self.var_shape,
@@ -21,17 +19,15 @@ class Ring_Loss(Layer):
         super(Ring_Loss, self).build(input_shape)
 
     def call(self, x):
-        
         #calculate l2 norm of features
         self.l2_norm = K.sqrt(K.sum(K.square(x), axis = -1))
         
-        
+        #calculate ring loss
         self.ring_loss = K.square(self.l2_norm - self.ring_norm) / 2.0
         
         return self.ring_loss
 
     def get_config(self):
-       
         config = {'radius': self.radius}
         base_config = super(Ring_Loss, self).get_config()
         return dict(list(base_config.items()) + list(config.items()))
