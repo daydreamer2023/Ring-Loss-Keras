@@ -6,18 +6,25 @@ Install Keras and Python.
 Download ringloss.py to your working directory. 
 
 ## Usage
-Initialize a RingLoss layer
+Initialize a Ring Loss layer and call the layer with your input feature
+
 ```
-ring_loss_layer = Ring_Loss(init_radius = 1.0, name = 'ring_loss')(feature_dlib)
+ring_loss = Ring_Loss(init_radius = 1.0, name = 'ring_loss')(feature)
 ```
-During model creation, call the layer with your input feature
-```
-ringloss = ring_loss_layer(feature) # your feature should be (batch_size x feat_size)
-```
-Finally, compile model combined with softmax . e.g.
+
+Finally, compile your model with softmax + ringloss . e.g.
 ```
 model.compile(loss = {'softmax_output' : 'categorical_crossentropy', 'ring_loss': identity_loss}, optimizer= opt,  metrics = ['accuracy'], loss_weights=[1,lambda_ring]) 
     
 ```
 
-## Training
+## TRAINING
+
+Pass a random output for ring loss during the batch data generation to satisfy the outputs.
+
+'''
+#Example :
+
+random_y_train = np.random.rand(batch_size,1)
+yield  [data], [y_trues, random_y_train]
+'''
