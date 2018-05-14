@@ -16,7 +16,7 @@ ring_loss = Ring_Loss(radius = 1.0, name = 'ring_loss')(feature)
 Finally, compile your model with softmax + ringloss . e.g.
 ```
 num_classes = 10
-x_in = Dense(num_classes, name = 'probe_out', kernel_initializer = 'he_normal')(feature) 
+x_in = Dense(num_classes, name = 'final_layer', kernel_initializer = 'he_normal')(feature) 
 output = Activation('softmax', name = 'softmax_out')(x_in)
     
 #compile model with ring loss + softmax    
