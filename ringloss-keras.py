@@ -2,6 +2,9 @@ import keras
 from keras.engine.topology import Layer
 from keras import backend as K
 
+def identity_loss(y_true, y_pred):
+    return y_pred
+
 class Ring_Loss(Layer):
     def __init__(self, radius = 1.0, **kwargs):
         self.radius = radius
