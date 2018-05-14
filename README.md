@@ -3,7 +3,7 @@ Keras implementation of Ring Loss : Convex Feature Normalization for Face Recogn
 
 ## Getting Started
 Install Keras and Python.
-Download ringloss.py to your working directory. 
+Download ringloss-keras.py to your working directory. 
 
 ## Usage
 Initialize a Ring Loss layer and call the layer with your input feature
