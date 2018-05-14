@@ -1,6 +1,7 @@
 import keras
 from keras.engine.topology import Layer
 from keras import backend as K
+from keras.initializers import Constant
 
 def identity_loss(y_true, y_pred):
     return y_pred
