@@ -24,7 +24,7 @@ model.compile(loss = {'softmax_out' : 'categorical_crossentropy', 'ring_loss': i
     
 ```
 
-## TRAINING
+## Training
 
 Pass a random output for ring loss during the batch data generation to satisfy the outputs.
 
