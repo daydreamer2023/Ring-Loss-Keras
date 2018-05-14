@@ -38,3 +38,6 @@ Pass a random output for ring loss during the batch data generation to satisfy t
 random_y_train = np.random.rand(batch_size,1)
 x_label, y_label =  [data], [y_trues, random_y_train]
 ```
+
+## Contact
+To ask questions or report issues, please open an issue on the [issues tracker](https://github.com/vsatyakumar/Ring-Loss-Keras/issues).
