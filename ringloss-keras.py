@@ -13,7 +13,7 @@ class Ring_Loss(Layer):
 
     def build(self, input_shape):
         self.var_shape = (1,)
-        #init radius weight value
+        #init radius weight
         self.ring_norm = self.add_weight(name='ring_norm',
                                      shape=self.var_shape,
                                      initializer = Constant(self.radius), 
