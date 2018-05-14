@@ -1,7 +1,11 @@
 # Ring-Loss-Keras
 Keras implementation of Ring Loss : Convex Feature Normalization for Face Recognition. Based on https://arxiv.org/abs/1803.00130
 
+## What?
 This paper highlights the importance of feature normalization in feature space for better clustering, unlike earlier methods e.g - L2 Constrained Softmax
+
+## Why?
+The direct approach to feature normalization through the hard normalization operation results in a non-convex formulation. Instead, Ring loss applies soft normalization, where it gradually learns to constrain the norm to the scaled unit circle while preserving convexity leading to more robust features.
 
 ## Getting Started
 Install Keras and Python.
