@@ -16,7 +16,7 @@ Initialize a Ring Loss layer and call the layer with your input feature
 
 ```
 lambda_ring = 1.0
-ring_loss = Ring_Loss(radius = 1.0, name = 'ring_loss')(feature)
+ring_loss = Ring_Loss(radius = 1.0, name = 'ring_loss')(feature) #shape of feature - (batch_size, feature_dims)
 ```
 
 Finally, compile your model with softmax + ringloss . e.g.
