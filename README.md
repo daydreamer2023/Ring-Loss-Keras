@@ -9,12 +9,18 @@ Download ringloss.py to your working directory.
 Initialize a Ring Loss layer and call the layer with your input feature
 
 ```
-ring_loss = Ring_Loss(init_radius = 1.0, name = 'ring_loss')(feature)
+lambda_ring = 1.0
+ring_loss = Ring_Loss(radius = 1.0, name = 'ring_loss')(feature)
 ```
 
 Finally, compile your model with softmax + ringloss . e.g.
 ```
-model.compile(loss = {'softmax_output' : 'categorical_crossentropy', 'ring_loss': identity_loss}, optimizer= opt,  metrics = ['accuracy'], loss_weights=[1,lambda_ring]) 
+num_classes = 10
+x_in = Dense(num_classes, name = 'probe_out', kernel_initializer = 'he_normal')(feature) 
+output = Activation('softmax', name = 'softmax_out')(x_in)
+    
+#compile model with ring loss + softmax    
+model.compile(loss = {'softmax_out' : 'categorical_crossentropy', 'ring_loss': identity_loss}, optimizer= opt,  metrics = ['accuracy'], loss_weights=[1,lambda_ring]) 
     
 ```
 
