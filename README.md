@@ -15,19 +15,22 @@ Download ringloss-keras.py to your working directory.
 Initialize a Ring Loss layer and call the layer with your input feature
 
 ```
-lambda_ring = 1.0
+lambda_ring = 0.1 #Loss Weight Range : 0.1-0.5 to ensure that the ring loss doesn't dominate the optimization process
 ring_loss = Ring_Loss(radius = 1.0, name = 'ring_loss')(feature) #shape of feature - (batch_size, feature_dims)
 ```
 
-Finally, compile your model with softmax + ringloss . e.g.
+Finally, compile your model with softmax + ringloss
+
 ```
+#init number of classes
 num_classes = 10
-x_in = Dense(num_classes, name = 'final_layer', kernel_initializer = 'he_normal')(feature) 
+
+#init final fully connected layer after the feature layer
+x_final = Dense(num_classes, name = 'final_layer', kernel_initializer = 'he_normal')(feature) 
 output = Activation('softmax', name = 'softmax_out')(x_in)
     
-#compile model with ring loss + softmax    
-model.compile(loss = {'softmax_out' : 'categorical_crossentropy', 'ring_loss': identity_loss}, optimizer= opt,  metrics = ['accuracy'], loss_weights=[1,lambda_ring]) 
-    
+#compile model with joint loss - (softmax loss + lambda_ring * ring loss)
+model.compile(loss = {'softmax_out' : 'categorical_crossentropy', 'ring_loss': identity_loss}, optimizer = opt,  metrics = ['accuracy'], loss_weights=[1,lambda_ring])     
 ```
 
 ## Training
