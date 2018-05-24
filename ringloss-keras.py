@@ -3,17 +3,18 @@ from keras.engine.topology import Layer
 from keras import backend as K
 from keras.initializers import Constant
 
+
 def identity_loss(y_true, y_pred):
     return y_pred
-
     
 def smooth_l1_ring_loss(x, ring_norm, HUBER_DELTA = 1.0):
     
     #get abs value
-    x   = K.abs(x)
+    x = K.abs(x)
     
     #apply huber loss
-    x   = K.switch(x < HUBER_DELTA, 0.5 * x ** 2, HUBER_DELTA * (x - 0.5 * HUBER_DELTA))
+    x = K.switch(x < HUBER_DELTA, 0.5 * x ** 2, HUBER_DELTA * (x - 0.5 * HUBER_DELTA))
+    
     return  K.square(K.sqrt(K.sum(x, axis = -1)) - ring_norm) / 2.0 
 
 def l2_ring_loss(x, ring_norm):
@@ -51,7 +52,7 @@ class Ring_Loss(Layer):
             self.ring_loss = l2_ring_loss(x, self.ring_norm)
 
         else: 
-            #calculate smoothL1 ring loss
+            #calculate smooth L1 ring loss
             self.ring_loss = smooth_l1_ring_loss(x, self.ring_norm, HUBER_DELTA = self.huber_delta)
         
         return self.ring_loss
