@@ -24,7 +24,7 @@ def l2_ring_loss(x, ring_norm):
     return K.square(l2_norm - ring_norm) / 2.0
     
     
-#[CUSTOM LAYER] : Ring Loss - https://arxiv.org/pdf/1803.00130.pdf
+#Ring Loss - https://arxiv.org/pdf/1803.00130.pdf
 class Ring_Loss(Layer):
     def __init__(self, radius = 1.0, loss_type = 'l2', **kwargs):
         self.radius = radius
