@@ -18,7 +18,7 @@ Initialize a Ring Loss layer and call the layer with your input feature
 lambda_ring = 0.1 #Loss Weight Range : 0.1-0.5 to ensure that the ring loss doesn't dominate the optimization process
 
 ring_loss = Ring_Loss(radius = 1.0, loss_type = 'smoothl1', name = 'ring_loss')(feature)
-#--> loss_type - 'l2' is default
+#--> loss_types - 'cauchy', 'geman', 'smoothl1', 'l2' - 'smoothl1' is default
 #--> shape of feature - (batch_size, feature_dims)
 
 ```
