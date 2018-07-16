@@ -10,13 +10,10 @@ def identity_loss(y_true, y_pred):
     
 def smooth_l1_ring_loss(x, ring_norm, HUBER_DELTA = 1.0):
     
-    #get abs value
-    x = K.abs(x)
-    
-    #apply huber loss
-    x = K.switch(x < HUBER_DELTA, 0.5 * x ** 2, HUBER_DELTA * (x - 0.5 * HUBER_DELTA))
-    
-    return  K.square(K.sqrt(K.sum(x, axis = -1)) - ring_norm) / 2.0 
+    l2_norm = K.sqrt(K.sum(K.square(x), axis = -1))
+    error = l2_norm - ring_norm
+    huber_loss = K.switch(error < HUBER_DELTA, 0.5 * error ** 2, HUBER_DELTA * (error - 0.5 * HUBER_DELTA))
+    return  huber_loss
 
 def l2_ring_loss(x, ring_norm):
     
