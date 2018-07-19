@@ -15,7 +15,7 @@ Download ringloss-keras.py to your working directory.
 Initialize a Ring Loss layer and call the layer with your input feature
 
 ```
-lambda_ring = 0.1 #Loss Weight Range : 0.1-0.5 to ensure that the ring loss doesn't dominate the optimization process. Since this is a relaxed normalization constraint, keep it chill...
+lambda_ring = 0.1 #Loss Weight Range : 0.1-0.5 to ensure that ring loss doesn't dominate the optimization process. Since this is a relaxed normalization constraint, keep it chill...
 
 ring_loss = Ring_Loss(radius = 1.0, loss_type = 'huber', name = 'ring_loss')(feature)
 #--> loss_types - 'cauchy', 'geman', 'huber', 'squared' - 'huber' is default
