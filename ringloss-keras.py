@@ -34,7 +34,7 @@ def geman_ring_loss(x, ring_norm, alpha = 0.5):
     
 #Ring Loss - https://arxiv.org/abs/1803.00130
 class Ring_Loss(Layer):
-    def __init__(self, radius = 1.0, loss_type = 'l2', **kwargs):
+    def __init__(self, radius = 1.0, loss_type = 'huber', **kwargs):
         self.radius = radius
         self.huber_delta = 1.0
         self.cauchy_scale_factor = 2.3849 #cauchy constant from - http://webdiis.unizar.es/~jcivera/papers/concha_civera_ecmr15.pdf
