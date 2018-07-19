@@ -8,19 +8,19 @@ import tensorflow as tf
 def identity_loss(y_true, y_pred):
     return y_pred
     
-def smooth_l1_ring_loss(x, ring_norm, HUBER_DELTA = 1.0):
+def huber_ring_loss(x, ring_norm, HUBER_DELTA = 1.0):
     
     l2_norm = K.sqrt(K.sum(K.square(x), axis = -1))
     error = l2_norm - ring_norm
     huber_loss = K.switch(error < HUBER_DELTA, 0.5 * error ** 2, HUBER_DELTA * (error - 0.5 * HUBER_DELTA))
     return  huber_loss
 
-def l2_ring_loss(x, ring_norm):
+def squared_ring_loss(x, ring_norm):
     
     #calculate l2 norm of features
     l2_norm = K.sqrt(K.sum(K.square(x), axis = -1))
     
-    return K.square(l2_norm - ring_norm) / 2.0
+    return 0.5 * K.square(l2_norm - ring_norm) 
     
 
 def cauchy_ring_loss(x, ring_norm, scale_factor = 2.3849):
@@ -65,9 +65,9 @@ class Ring_Loss(Layer):
 
     def call(self, x):
         
-        if self.loss_type == 'l2':
+        if self.loss_type == 'squared':
             #calculate L2 ring loss
-            self.ring_loss = l2_ring_loss(x, self.ring_norm)
+            self.ring_loss = squared_ring_loss(x, self.ring_norm)
 
         elif self.loss_type == 'cauchy':
             
@@ -79,9 +79,12 @@ class Ring_Loss(Layer):
             #calculate geman-mcclure ring loss
             self.ring_loss = geman_ring_loss(x, self.ring_norm, alpha = self.geman_alpha)    
                      
-        else: 
-            #calculate smooth L1 ring loss
-            self.ring_loss = smooth_l1_ring_loss(x, self.ring_norm, HUBER_DELTA = self.huber_delta)
+        elif self.loss_type == 'huber': 
+            #calculate Smooth-L1/Huber ring loss
+            self.ring_loss = huber_ring_loss(x, self.ring_norm, HUBER_DELTA = self.huber_delta)
+        else:
+            print("Invalid Loss Name specified. Available options are : 'squared', 'huber', 'cauchy' and 'geman'. Continuing with default loss - 'huber'")
+            self.ring_loss = huber_ring_loss(x, self.ring_norm, HUBER_DELTA = self.huber_delta)
         
         return self.ring_loss
 
