@@ -47,8 +47,7 @@ x_label, y_label =  [data], [y_trues, random_y_train]
 ```
 
 ## References
-https://arxiv.org/abs/1803.00130
-http://webdiis.unizar.es/~jcivera/papers/concha_civera_ecmr15.pdf
+https://arxiv.org/abs/1803.00130 . http://webdiis.unizar.es/~jcivera/papers/concha_civera_ecmr15.pdf
 
 ## Contact
 To ask questions or report issues, please open an issue on the [issues tracker](https://github.com/vsatyakumar/Ring-Loss-Keras/issues).
