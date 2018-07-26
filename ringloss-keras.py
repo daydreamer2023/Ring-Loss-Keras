@@ -49,7 +49,7 @@ class Ring_Loss(Layer):
                                      shape=self.var_shape,
                                      initializer = Constant(self.radius), 
                                      dtype = K.floatx(),
-                                     trainable = True)
+                                     trainable = self.trainable)
         super(Ring_Loss, self).build(input_shape)
 
     def call(self, x):
