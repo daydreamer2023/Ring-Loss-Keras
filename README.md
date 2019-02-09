@@ -8,7 +8,7 @@ This paper highlights the importance of feature normalization in feature space f
 The direct approach to feature normalization through the hard normalization operation results in a non-convex formulation. Instead, Ring loss applies soft normalization, where it gradually learns to constrain the norm to the scaled unit circle while preserving convexity leading to more robust features.
 
 ## Getting Started
-Install Keras and Python.
+Install Tensorflow and Keras.
 Download ringloss-keras.py to your working directory. 
 
 ## Usage
