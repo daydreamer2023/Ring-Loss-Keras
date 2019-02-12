@@ -3,7 +3,7 @@ from keras.engine.topology import Layer
 from keras import backend as K
 from keras.initializers import Constant
 import tensorflow as tf
-
+from keras.utils.generic_utils import get_custom_objects
 
 def identity_loss(y_true, y_pred):
     return y_pred
@@ -82,3 +82,6 @@ class Ring_Loss(Layer):
     def compute_output_shape(self, input_shape):
         output_shape = (input_shape[0],1)
         return output_shape
+
+#Imporant!
+get_custom_objects().update({'Ring_Loss': Ring_Loss})
