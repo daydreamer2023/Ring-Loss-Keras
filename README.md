@@ -9,7 +9,7 @@ The direct approach to feature normalization through the hard normalization oper
 
 ## Getting Started
 Install Tensorflow and Keras.
-Download ringloss-keras.py to your working directory. 
+Download ringloss-keras.py to your working directory and import everything.
 
 ## Usage
 Initialize a Ring Loss layer and call the layer with your input feature
