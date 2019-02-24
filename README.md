@@ -34,6 +34,7 @@ x_final = Dense(num_classes, name = 'final_layer', kernel_initializer = 'he_norm
 output = Activation('softmax', name = 'softmax_out')(x_final)
     
 #compile model with joint loss - (softmax loss + lambda_ring * ring loss)
+model = Model(inputs=inputs, outputs=[output, ring_loss])
 model.compile(loss = {'softmax_out' : 'categorical_crossentropy', 'ring_loss': identity_loss}, optimizer = opt,  metrics = ['accuracy'], loss_weights=[1,lambda_ring])     
 ```
 
